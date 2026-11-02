@@ -1,4 +1,4 @@
-import AppLoader from '../loader/appLoader';
+import AppLoader from './appLoader';
 import { Article, Source, RequestOptions } from '../../../types';
 
 class AppController extends AppLoader {
