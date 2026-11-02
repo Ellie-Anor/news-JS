@@ -1,5 +1,5 @@
 import AppLoader from './appLoader';
-import { Article, Source, RequestOptions } from '../../../types';
+import { Article, Source, RequestOptions } from '../../types';
 
 class AppController extends AppLoader {
     public getSources(callback: (data: { sources: Source[] }) => void): void {

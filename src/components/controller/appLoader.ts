@@ -1,5 +1,5 @@
 import Loader from './loader';
-import { RequestOptions } from '../../../types';
+import { RequestOptions } from '../../types';
 
 class AppLoader extends Loader {
     constructor() {
