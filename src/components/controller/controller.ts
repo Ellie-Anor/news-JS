@@ -35,7 +35,6 @@ class AppController extends AppLoader {
                 }
                 return;
             }
-            // Защита от null
             if (target.parentNode) {
                 target = target.parentNode as HTMLElement;
             } else {
