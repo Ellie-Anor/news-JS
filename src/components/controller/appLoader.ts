@@ -3,13 +3,8 @@ import { RequestOptions } from '../../types';
 
 class AppLoader extends Loader {
     constructor() {
-        const apiUrl = process.env.API_URL || 'https://rss-news-api.onrender.com/';
-        const apiKey = process.env.API_KEY || '';
-
-        const options: RequestOptions = {
-            apiKey: apiKey,
-        };
-
+        const apiUrl = 'https://rss-news-api.onrender.com/';
+        const options: RequestOptions = {};
         super(apiUrl, options);
     }
 }
