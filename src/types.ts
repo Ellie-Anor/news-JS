@@ -43,4 +43,5 @@ export type RequestOptions = Partial<{
   sources: string;
   pageSize: number;
   page: number;
+  apiKey?: string;
 }>;
