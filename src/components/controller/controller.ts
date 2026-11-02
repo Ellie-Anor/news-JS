@@ -1,8 +1,9 @@
-import AppLoader from './appLoader';
+import AppLoader from '../loader/appLoader';
+import { Article, Source, RequestOptions } from '../../../types';
 
 class AppController extends AppLoader {
-    getSources(callback) {
-        super.getResp(
+    public getSources(callback: (data: { sources: Source[] }) => void): void {
+        super.getResp<{ sources: Source[] }>(
             {
                 endpoint: 'sources',
             },
@@ -10,28 +11,36 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e, callback) {
-        let target = e.target;
-        const newsContainer = e.currentTarget;
+    public getNews(e: Event, callback: (data: { articles: Article[] }) => void): void {
+        let target = e.target as HTMLElement;
+        const newsContainer = e.currentTarget as HTMLElement;
 
         while (target !== newsContainer) {
             if (target.classList.contains('source__item')) {
                 const sourceId = target.getAttribute('data-source-id');
-                if (newsContainer.getAttribute('data-source') !== sourceId) {
+                if (newsContainer.getAttribute('data-source') !== sourceId && sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp(
+                    
+                    const options: RequestOptions = {
+                        sources: sourceId,
+                    };
+
+                    super.getResp<{ articles: Article[] }>(
                         {
                             endpoint: 'everything',
-                            options: {
-                                sources: sourceId,
-                            },
+                            options: options,
                         },
                         callback
                     );
                 }
                 return;
             }
-            target = target.parentNode;
+            // Защита от null
+            if (target.parentNode) {
+                target = target.parentNode as HTMLElement;
+            } else {
+                break;
+            }
         }
     }
 }
